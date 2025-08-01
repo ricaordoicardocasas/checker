@@ -189,9 +189,9 @@ $msg = getStr($pay, 'error":"', '"');
 $binchecker = getFluidpayDetails(substr($cc, 0, 6))['details'];
 
 if (strpos($pay, "Your card's security code is incorrect")) {
-    echo '<span class="text-success">Aprovada</span> ➔ <span class="text-white">' . $lista . ' ' . $binchecker . '</span> ➔ <span class="text-success"> ' . $msg . ' </span> ➔ PROXY: '.$ip.' ➔ <span class="text-warning">@ABOBORASUPORTE</span><br>';
+    echo '<span class="text-success">Aprovada</span> ➔ <span class="text-white">' . $lista . ' ' . $binchecker . '</span> ➔ <span class="text-success"> ' . $msg . ' </span> ➔ PROXY: '.$ip.' ➔ <span class="text-warning"></span><br>';
 } elseif (strpos($pay, "Your card has insufficient funds")) {
-    echo '<span class="text-success">Aprovada</span> ➔ <span class="text-white">' . $lista . ' ' . $binchecker . '</span> ➔ <span class="text-success"> ' . $msg . ' </span> ➔ PROXY: '.$ip.' ➔ <span class="text-warning">@ABOBORASUPORTE</span><br>';
+    echo '<span class="text-success">Aprovada</span> ➔ <span class="text-white">' . $lista . ' ' . $binchecker . '</span> ➔ <span class="text-success"> ' . $msg . ' </span> ➔ PROXY: '.$ip.' ➔ <span class="text-warning"></span><br>';
 } else {
-    echo '<span class="text-danger">Reprovada</span> ➔ <span class="text-white">' . $lista . ' ' . $binchecker . '</span> ➔ <span class="text-danger"> ' . $msg . ' </span> ➔ PROXY: '.$ip.' ➔ <span class="text-warning">@ABOBORASUPORTE</span><br>';
+    echo '<span class="text-danger">Reprovada</span> ➔ <span class="text-white">' . $lista . ' ' . $binchecker . '</span> ➔ <span class="text-danger"> ' . $msg . ' </span> ➔ PROXY: '.$ip.' ➔ <span class="text-warning"></span><br>';
 }

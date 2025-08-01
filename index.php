@@ -347,8 +347,8 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
       lista = inputText.split("\n").filter((line) => line.trim() !== "");
       const totalInicial = lista.length;
 
-      if (totalInicial > 150) {
-        toastr.error("Limite máximo de 150 cartões excedido!");
+      if (totalInicial > 500) {
+        toastr.error("Limite máximo de 500 cartões excedido!");
         return;
       }
 

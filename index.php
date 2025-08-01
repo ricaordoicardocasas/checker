@@ -223,7 +223,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
       Aprovados: <span id="aprovadas-count">0</span>
     </div>
 
-    <textarea id="lista" placeholder="Lista de cartıes... (atÈ 150)"></textarea>
+    <textarea id="lista" placeholder="Lista de cart√µes... (at√© 500)"></textarea>
 
     <div class="button-group">
       <button class="btn" id="start"><i class="fas fa-play"></i> Iniciar</button>
@@ -297,7 +297,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
         if (lista.length === 0 && activeThreads === 0) {
           updateStatus("Teste finalizado.");
           document.getElementById("endSound").play();
-          toastr.info("Todos os cartıes foram testados.");
+          toastr.info("Todos os cart√µes foram testados.");
         }
         return;
       }
@@ -307,7 +307,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
         if (activeThreads === 0) {
           updateStatus("Teste finalizado.");
           document.getElementById("endSound").play();
-          toastr.info("Todos os cartıes foram testados.");
+          toastr.info("Todos os cart√µes foram testados.");
         }
         return;
       }
@@ -332,7 +332,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
           setTimeout(() => worker(totalInicial), 50); // Delay menor para maior velocidade
         })
         .fail(function () {
-          toastr.error("Erro ao testar cart„o.");
+          toastr.error("Erro ao testar cart√£o.");
           $("#lista").val(lista.join("\n")).scrollTop(0);
           updateProgress(totalInicial);
           activeThreads--;
@@ -348,7 +348,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
       const totalInicial = lista.length;
 
       if (totalInicial > 150) {
-        toastr.error("Limite m·ximo de 150 cartıes excedido!");
+        toastr.error("Limite m√°ximo de 150 cart√µes excedido!");
         return;
       }
 
@@ -374,7 +374,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
       if (!stopped) {
         paused = !paused;
         updateStatus(paused ? "Pausado" : "Executando...");
-        toastr.info(paused ? "Checker pausado." : "ExecuÁ„o retomada.");
+        toastr.info(paused ? "Checker pausado." : "Execu√ß√£o retomada.");
         if (!paused) {
           for (let i = 0; i < maxThreads; i++) {
             worker(lista.length);
@@ -387,7 +387,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
       stopped = true;
       paused = false;
       updateStatus("Parado");
-      toastr.error("ExecuÁ„o parada.");
+      toastr.error("Execu√ß√£o parada.");
     });
 
     $("#clear").click(() => {

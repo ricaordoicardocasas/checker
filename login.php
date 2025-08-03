@@ -899,4 +899,5 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
 </script>
 <?php endif; ?>
 </body>
+
 </html>

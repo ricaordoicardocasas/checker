@@ -263,13 +263,13 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
         .title-neon {
             font-size: 60px;
             font-weight: 900;
-            background: linear-gradient(90deg, #ff00cc, rgb(221, 51, 255), #00ffcc);
+            background: linear-gradient(90deg, #00FF00, rgb(221, 51, 255), #00FF00);
             background-size: 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientFlow 3s ease infinite;
-            text-shadow: 0 0 10px rgba(255, 0, 255, 0.7), 
-                        0 0 20px rgba(0, 255, 255, 0.5);
+            text-shadow: 0 0 2px rgba(1, 0, 255, 0.7), 
+                        0 0 2px rgba(0, 255, 255, 0.5);
             text-align: center;
             margin: 20px 0;
         }
@@ -291,8 +291,8 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
             border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.7), 
-                        0 0 20px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 0px rgba(0, 0, 255, 0.7), 
+                        0 0 0px rgba(0, 255, 255, 0.5);
             transition: transform 0.3s ease;
             animation: gradientFlow 3s ease infinite;
         }
@@ -315,11 +315,11 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.7), 
                         0 0 20px rgba(0, 255, 255, 0.5);
         }
-        .btn-erede { background: linear-gradient(90deg, #a100ff, #a100ff); }
-        .btn-cvv2 { background: linear-gradient(90deg, #a100ff, #a100ff); }
-        .btn-visa-bb { background: linear-gradient(90deg, #a100ff, #a100ff); }
-        .btn-paypal { background: linear-gradient(90deg, #a100ff, #a100ff); }
-        .btn-stripe { background: linear-gradient(90deg, #a100ff, #a100ff); }
+        .btn-erede { background: linear-gradient(90deg, #4169E1, #4169E1); }
+        .btn-cvv2 { background: linear-gradient(90deg, #4169E1, #4169E1); }
+        .btn-visa-bb { background: linear-gradient(90deg, #4169E1, #4169E1); }
+        .btn-paypal { background: linear-gradient(90deg, #4169E1, #4169E1); }
+        .btn-stripe { background: linear-gradient(90deg, #4169E1, #4169E1); }
         #countdown {
             color: #ff0000;
             font-weight: bold;

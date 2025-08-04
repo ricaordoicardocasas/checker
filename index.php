@@ -315,11 +315,11 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.7), 
                         0 0 20px rgba(0, 255, 255, 0.5);
         }
-        .btn-erede { background: linear-gradient(90deg, #ff6200, #a100ff); }
-        .btn-cvv2 { background: linear-gradient(90deg, #00ff00, #a100ff); }
-        .btn-visa-bb { background: linear-gradient(90deg, #ffff00, #a100ff); }
-        .btn-paypal { background: linear-gradient(90deg, #007bff, #a100ff); }
-        .btn-stripe { background: linear-gradient(90deg, #8000ff, #a100ff); }
+        .btn-erede { background: linear-gradient(90deg, #a100ff, #a100ff); }
+        .btn-cvv2 { background: linear-gradient(90deg, #a100ff, #a100ff); }
+        .btn-visa-bb { background: linear-gradient(90deg, #a100ff, #a100ff); }
+        .btn-paypal { background: linear-gradient(90deg, #a100ff, #a100ff); }
+        .btn-stripe { background: linear-gradient(90deg, #a100ff, #a100ff); }
         #countdown {
             color: #ff0000;
             font-weight: bold;
@@ -901,3 +901,4 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
 </body>
 
 </html>
+

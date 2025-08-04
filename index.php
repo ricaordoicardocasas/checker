@@ -456,7 +456,7 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
     </div>
 <?php else: ?>
     <h1 class="title-neon">CHECKER GG</h1>
-    <div class="container text-white rounded shadow p-3 my-4" style="background: #7B68EE; border-radius: 5px; border: 1px solid rgb(218, 87, 178);">
+    <div class="container text-white rounded shadow p-3 my-4" style="background: #1C1C1C; border-radius: 5px; border: 1px solid rgb(218, 87, 178);">
         <div class="container-fluid">
             <h3 id="gate-title"><i class="fas fa-cogs"></i> GATE E-REDE</h3>
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -901,5 +901,6 @@ if (isset($_SESSION['logado'], $_SESSION['username']) && !$_SESSION['is_admin'])
 </body>
 
 </html>
+
 
 

